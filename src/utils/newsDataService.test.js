@@ -28,9 +28,11 @@ describe('getNewsDataAsync tests', () => {
         // Arrange
         const testNews = {
             data: {
-                results: [{
-                    headline: `mock headline`, thumbnail: `mock picture`
-                }]
+                response: {
+                    results: [{
+                        headline: `mock headline`, thumbnail: `mock picture`
+                    }]
+                }
             }
         };
         axiosMock.get.mockResolvedValueOnce(testNews);
@@ -39,7 +41,7 @@ describe('getNewsDataAsync tests', () => {
         const result = await getNewsDataAsync();
 
         // Assert
-        expect(result).toEqual(testNews.data.results);
+        expect(result).toEqual(testNews.data.response.results);
     });
 
     test('should check that in case the right data is not returned, the correct error object is returned', async () => {
